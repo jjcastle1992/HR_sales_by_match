@@ -30,10 +30,9 @@ int sockMerchant(int totalSocks, vector<int> arrayOfSocks) {
         int currentColor = 0;
         bool colorExists = false;
         int uniqueIndex = 0;
-        int uniqueArraySize = uniqueValueArray.size();
 
         //Search for current "Color" in my uniqueValueArray
-        while ((!colorExists) && (uniqueIndex < uniqueArraySize)) {
+        while ((!colorExists) && (uniqueIndex < uniqueValueArray.size())) {
             if (currentColor == uniqueValueArray [uniqueIndex]) {
                 //If the value is already in the uniqueValueArray, then take the current index,
                 // find the value currently in the duplicateValueCounter Array, and add 1.
@@ -45,10 +44,9 @@ int sockMerchant(int totalSocks, vector<int> arrayOfSocks) {
         //If the value is not found in the unique array, pushback the currentColor into the uniqueArray.
         //At the same time, pushback '1' into the duplicateValueCounter at the same index as the uniqueArray.
         if (!colorExists) {
-            uniqueValueArray [i] = currentColor;
-            duplicateValueCounter [i] = 1;
+            uniqueValueArray.push_back(currentColor);
+            duplicateValueCounter.push_back(1);
         }
-
     }
 
     //Step through the duplicateValueCounter
@@ -60,7 +58,7 @@ int sockMerchant(int totalSocks, vector<int> arrayOfSocks) {
         }
 
         // % each element by 2. If 0, then take the value in the element, and divide by 2. Add this value to
-        //pairsOfSOcks.
+        //pairsOfSocks.
 
         else if ((duplicateValueCounter [j] % 2) == 0) {
             pairsOfSocks += ((duplicateValueCounter[j]) / 2 );
@@ -81,7 +79,7 @@ int sockMerchant(int totalSocks, vector<int> arrayOfSocks) {
             }
         }
     }
-    
+
     //Return the final number of pairs of socks. Do nothing with loaner sock count for now...
     return pairsOfSocks;
     //Original Idea:
