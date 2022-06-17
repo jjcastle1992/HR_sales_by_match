@@ -110,18 +110,20 @@ int main()
     getline(cin, ar_temp_temp);
 
     vector<string> ar_temp = split(rtrim(ar_temp_temp));
+    if (n >= 1 && n <= 100) {
+        vector<int> ar(n);
 
-    vector<int> ar(n);
+        for (int i = 0; i < n; i++) {
+            int ar_item = stoi(ar_temp[i]);
+            if (ar_item >= 1 && ar_item <= 100) {
+                ar[i] = ar_item;
+            }
+        }
 
-    for (int i = 0; i < n; i++) {
-        int ar_item = stoi(ar_temp[i]);
+        int result = sockMerchant(n, ar);
 
-        ar[i] = ar_item;
+        fout << result << "\n";
     }
-
-    int result = sockMerchant(n, ar);
-
-    fout << result << "\n";
 
     fout.close();
 
