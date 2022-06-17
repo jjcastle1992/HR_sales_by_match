@@ -15,8 +15,26 @@ vector<string> split(const string &);
  *  2. INTEGER_ARRAY ar
  */
 
-int sockMerchant(int n, vector<int> ar) {
+int sockMerchant(int totalSocks, vector<int> arrayOfSocks) {
+    int pairsOfSocks = 0;
 
+    vector <vector<int>> uniqueValueArray;
+    //need an algorithm that looks at numbers in an array for pairs (divisible by 2... so count up unique instances
+    //of a number and if %2, then a pair. If not % 2, then subtract 1, and add it to the odd "sock pile".
+
+    //Consider making a vector of vectors of ints that holds unique values, ands then the count of duplicates will
+    // be in the vector that comes off of each one. Then can call the size function on the sub-vector to determine
+    // number of duplicates.
+
+    //Check each element of the unique value array, and do a size of the vector within.
+    // Take this size, and add 1 for the unique value. % 2 this value.
+    //If  % = 0, then divide total by 2 to and add this to the pairCounter.
+    //If % != 1, then add one to lonelySockCount, subtract 1 amount of socks in the color, and check % 2 = 0.
+    //If now 0, then use logic for  % 0.
+    //This value should give you the number of pairs remaining. Add this value to the pair counter.
+
+    //Return the final number of pairs of socks. Do nothing with loaner sock count for now...
+    return pairsOfSocks;
 }
 
 int main()
