@@ -31,9 +31,10 @@ int sockMerchant(int totalSocks, vector<int> arrayOfSocks) {
         bool colorExists = false;
         int uniqueIndex = 0;
 
+        currentColor = arrayOfSocks [i];
         //Search for current "Color" in my uniqueValueArray
         while ((!colorExists) && (uniqueIndex < uniqueValueArray.size())) {
-            if (currentColor == uniqueValueArray [uniqueIndex]) {
+            if ((currentColor == uniqueValueArray [uniqueIndex]) && (!uniqueValueArray.empty())) {
                 //If the value is already in the uniqueValueArray, then take the current index,
                 // find the value currently in the duplicateValueCounter Array, and add 1.
                 colorExists = true;
