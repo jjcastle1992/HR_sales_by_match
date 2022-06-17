@@ -17,9 +17,10 @@ vector<string> split(const string &);
 
 int sockMerchant(int totalSocks, vector<int> arrayOfSocks) {
     int pairsOfSocks = 0;
-
+    int lonelySocks = 0;
     vector <int> uniqueValueArray;
-    vector <int> valueDuplicateCounter;
+    vector <int> duplicateValueCounter;
+
     //need an algorithm that looks at numbers in an array for pairs (divisible by 2... so count up unique instances
     //of a number and if %2, then a pair. If not % 2, then subtract 1, and add it to the odd "sock pile".
 
@@ -27,20 +28,59 @@ int sockMerchant(int totalSocks, vector<int> arrayOfSocks) {
     //each element in the unique array.
     for (int i = 0; i < arrayOfSocks.size(); i++) {
         int currentColor = 0;
+        bool colorExists = false;
+        int uniqueIndex = 0;
+        int uniqueArraySize = uniqueValueArray.size();
+
         //Search for current "Color" in my uniqueValueArray
+        while ((!colorExists) && (uniqueIndex < uniqueArraySize)) {
+            if (currentColor == uniqueValueArray [uniqueIndex]) {
+                //If the value is already in the uniqueValueArray, then take the current index,
+                // find the value currently in the duplicateValueCounter Array, and add 1.
+                colorExists = true;
+                duplicateValueCounter[uniqueIndex] += 1;
+            }
+            uniqueIndex++;
+        }
         //If the value is not found in the unique array, pushback the currentColor into the uniqueArray.
         //At the same time, pushback '1' into the duplicateValueCounter at the same index as the uniqueArray.
+        if (!colorExists) {
+            uniqueValueArray [i] = currentColor;
+            duplicateValueCounter [i] = 1;
+        }
 
-        //If the value is already in the uniqueValueArray, then take the current index, find the value currently
-        //in the duplicateValueCounter Array, and add 1.
     }
 
     //Step through the duplicateValueCounter
-    // % each element by 2. If 0, then take the value in the element, and divide by 2. Add this value to
-    //pairsOfSOcks.
+    for (int j = 0; j < duplicateValueCounter.size(); j++) {
 
-    //if % not 0, then increment lonelySockCount, subtract 1 from current element value. % 2. If 0, then
-    // divide value by 2 as before, and add this amount to pairsOfSocks.
+        //Confirm if there is only 1 sock
+        if (duplicateValueCounter [j] == 1) {
+            lonelySocks++;
+        }
+
+        // % each element by 2. If 0, then take the value in the element, and divide by 2. Add this value to
+        //pairsOfSOcks.
+
+        else if ((duplicateValueCounter [j] % 2) == 0) {
+            pairsOfSocks += ((duplicateValueCounter[j]) / 2 );
+        }
+
+        //if % not 0, then increment lonelySockCount,
+        // subtract 1 from current element value. % 2. If 0, then
+        // divide value by 2 as before, and add this amount to pairsOfSocks.
+        else if ((duplicateValueCounter [j] % 2) != 0) {
+            int confirmedPairs = 0;
+            lonelySocks++;
+            confirmedPairs = (duplicateValueCounter [j] - 1);
+            if (confirmedPairs % 2 == 0) {
+                pairsOfSocks += (confirmedPairs / 2 );
+            }
+            else {
+                std::cout << "ERROR: there's an issue with logic around counting pairs of socks..." << std::endl;
+            }
+        }
+    }
     
     //Return the final number of pairs of socks. Do nothing with loaner sock count for now...
     return pairsOfSocks;
